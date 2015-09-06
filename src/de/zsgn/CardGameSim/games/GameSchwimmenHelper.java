@@ -3,26 +3,30 @@ package de.zsgn.CardGameSim.games;
 import de.zsgn.CardGameSim.cards.Card;
 
 public class GameSchwimmenHelper {
-	public double getHandValue(Card[] hand)
+	public static double getHandValue(Card[] hand)
 	{
 
 		if(hand.length!= 3 ) 
 		{
 			return -1;
 		}
-		int[] sum = new int[4];
-		for( int color = 0 ; color < 4 ; color++) {
+		double highestSum = 0;
+		double[] sum = new double[4];
+		for(int color = 0 ; color < 4 ; color++) {
+			sum[color] = getValueIfGivenColor(hand[0],color) + getValueIfGivenColor(hand[1],color) +getValueIfGivenColor(hand[2],color);
 			
-
+			if (sum[color] > highestSum) {
+			 highestSum = sum[color];
+				
+			}
 		}
-
-		{
-			//double sum = getValue(hand[0]) + getValue(hand[1]) + getValue(hand[2]);
-
-			return 0;
-		}
+		return highestSum;
+		
+		
+		
+		
 	}
-	public double getValueIfGivenColor(Card singelCard , int color) {
+	public static double getValueIfGivenColor(Card singelCard , int color) {
 		if(singelCard.getColor().ordinal() == color) {
 			return getValue(singelCard);
 		}
@@ -30,7 +34,7 @@ public class GameSchwimmenHelper {
 		
 	}
 
-	public double getValue(Card singelCard) {
+	public static double getValue(Card singelCard) {
 		int cardNumber = singelCard.getValue().ordinal();
 
 		switch(cardNumber) {

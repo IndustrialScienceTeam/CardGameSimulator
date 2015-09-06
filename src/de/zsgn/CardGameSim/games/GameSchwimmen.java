@@ -30,15 +30,18 @@ public class GameSchwimmen extends Game {
     }
     public void printGameInfo() {
         System.out.println("Auf dem Tisch:");
+        
         for (Card card : cardsontable) {
             System.out.println(card);
         }
+        System.out.println("Value on table: "+ GameSchwimmenHelper.getHandValue(cardsontable.toArray(new Card[]{})));
         System.out.println();
         for (PlayerSchwimmen player : getPlayersforSchwimmen()) {
             System.out.println("Player: "+player.name);
             for (Card card : player.getHand()) {
                 System.out.println(card);
             }
+            System.out.println("Value on table: "+ GameSchwimmenHelper.getHandValue(player.getHand().toArray(new Card[]{})));
             System.out.println();
         }
         
