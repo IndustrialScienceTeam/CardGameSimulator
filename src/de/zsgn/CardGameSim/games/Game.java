@@ -16,5 +16,5 @@ protected Game(Player[] players, Card[] cardset, int maxplayers) {
     if(players.length>maxplayers)
         throw new InstantiationError("Too many Players");
 }
-public abstract Player startGame();
+public abstract Player startGame(int rounds);
 }

@@ -11,9 +11,24 @@ public abstract class PlayerSchwimmen extends Player {
         super(name);
     }
 
-    public void giveHand(ArrayList<Card> hand) {
+    public ArrayList<Card> giveHand(ArrayList<Card> hand, ArrayList<Card> extrahand) {
+        if(extrahand!=null){
+            if(!takeThisHand(hand)){
+                this.hand=extrahand;
+              return hand;  
+            }
+        }
         this.hand=hand;
+        return extrahand;
         
     }
+    public abstract void OnPlayerGotCard(PlayerSchwimmen player, Card card);
+    public abstract void OnPlayerExchangedCards(PlayerSchwimmen player, Card card);
+    protected abstract boolean takeThisHand(ArrayList<Card> hand);
+
+    public ArrayList<Card> getHand() {
+        return hand;
+    }
+    
 
 }
