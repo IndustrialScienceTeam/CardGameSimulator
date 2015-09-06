@@ -1,6 +1,8 @@
 package de.zsgn.CardGameSim.games;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import de.zsgn.CardGameSim.cards.Card;
 import de.zsgn.CardGameSim.cards.CardFactory;
@@ -20,7 +22,8 @@ public class GameSchwimmen extends Game {
         for (Card card : cardset) {
             cardslist.add(card);
         }
-        Colo
+        Collections.shuffle(cardslist);
+        ArrayDeque<Card> deck=new ArrayDeque<>(cardslist);
         for (PlayerSchwimmen player : getPlayersforSchwimmen()) {
         }
         return null;
