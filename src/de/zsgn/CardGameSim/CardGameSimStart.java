@@ -17,4 +17,3 @@ public class CardGameSimStart {
     }
 
 }
-//Hello World git test
