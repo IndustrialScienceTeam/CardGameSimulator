@@ -1,8 +1,8 @@
 package de.zsgn.CardGameSim.cards;
 
 public enum FrenchColor {
-HEARTS,
-DIAMONDS,
-CLUBS,
-SPADES;
+HEARTS,		//0
+DIAMONDS,	//1
+CLUBS,		//2
+SPADES;		//3
 }
