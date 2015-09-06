@@ -9,13 +9,27 @@ public class GameSchwimmenHelper {
 		if(hand.length!= 3 ) 
 		{
 			return -1;
-		}else
+		}
+		int[] sum = new int[4];
+		for( int color = 0 ; color < 4 ; color++) {
+			
+
+		}
+
 		{
-		double sum = getValue(hand[0]) + getValue(hand[1]) + getValue(hand[2]);
-		
-		return sum;
+			//double sum = getValue(hand[0]) + getValue(hand[1]) + getValue(hand[2]);
+
+			return 0;
 		}
 	}
+	public double getValueIfGivenColor(Card singelCard , int color) {
+		if(singelCard.getColor().ordinal() == color) {
+			return getValue(singelCard);
+		}
+		return 0;
+		
+	}
+
 	public double getValue(Card singelCard) {
 		int cardNumber = singelCard.getValue().ordinal();
 
