@@ -6,7 +6,6 @@ import java.util.Collections;
 
 import de.zsgn.CardGameSim.cards.Card;
 import de.zsgn.CardGameSim.cards.CardFactory;
-import de.zsgn.CardGameSim.games.choice.GameChoice;
 import de.zsgn.CardGameSim.players.Player;
 import de.zsgn.CardGameSim.players.schwimmen.PlayerSchwimmen;
 
