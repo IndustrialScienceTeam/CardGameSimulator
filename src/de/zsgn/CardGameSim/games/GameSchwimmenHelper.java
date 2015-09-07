@@ -14,24 +14,27 @@ public class GameSchwimmenHelper {
 		double[] sum = new double[4];
 		for(int color = 0 ; color < 4 ; color++) {
 			sum[color] = getValueIfGivenColor(hand[0],color) + getValueIfGivenColor(hand[1],color) +getValueIfGivenColor(hand[2],color);
-			
+
 			if (sum[color] > highestSum) {
-			 highestSum = sum[color];
-				
+				highestSum = sum[color];
+
 			}
 		}
+		if ((hand[0].getValue().ordinal() == hand[1].getValue().ordinal()) && (hand[0].getValue().ordinal() == hand[2].getValue().ordinal())) {
+			highestSum = 30.5;
+		}
 		return highestSum;
-		
-		
-		
-		
+
+
+
+
 	}
 	public static double getValueIfGivenColor(Card singelCard , int color) {
 		if(singelCard.getColor().ordinal() == color) {
 			return getValue(singelCard);
 		}
 		return 0;
-		
+
 	}
 
 	public static double getValue(Card singelCard) {
