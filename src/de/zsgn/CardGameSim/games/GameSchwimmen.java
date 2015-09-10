@@ -34,6 +34,7 @@ public class GameSchwimmen extends Game {
                     Thread.sleep(1000);
                     printDebug("Current Player: "+player);
                     if(player.equals(playerthatpassed)){
+                        printDebug("DONE!");
                         gameruning=false;
                         break;
                     }
@@ -43,16 +44,15 @@ public class GameSchwimmen extends Game {
                     }else{
                         CardExchange cardex=player.getCardExchange(cardsontable);
                         if(cardex.isCompleteChange()){ 
-                            ArrayList<Card> oldcardsontable=cardsontable;
+                            ArrayList<Card> oldcardsontable=new ArrayList<Card>(cardsontable);
                             cardsontable.clear();
                             cardsontable.addAll(player.getHand());
-                            System.err.println(oldcardsontable);
                             player.setHand(oldcardsontable);   
                         }else {
                             if(cardsontable.contains(cardex.getTableCard())&&player.getHand().contains(cardex.getHandCard())){
                                 cardsontable.remove(cardex.getTableCard());
                                 cardsontable.add(cardex.getHandCard());
-                                ArrayList<Card> newHand =player.getHand();
+                                ArrayList<Card> newHand =new ArrayList<Card>(player.getHand());
                                 newHand.remove(cardex.getHandCard());
                                 newHand.add(cardex.getTableCard());
                                 player.setHand(newHand);
