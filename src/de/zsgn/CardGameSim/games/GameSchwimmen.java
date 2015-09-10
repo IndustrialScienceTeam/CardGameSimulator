@@ -66,7 +66,8 @@ public class GameSchwimmen extends Game {
             }
 
         }
-        //No lives at the moment
+        printGameInfo();
+        //No lives at the moment, kein Unentschieden
         PlayerSchwimmen winningplayer=getPlayersforSchwimmen()[0];
         for (int i = 1; i < getPlayersforSchwimmen().length; i++) {
             PlayerSchwimmen player = getPlayersforSchwimmen()[i];
