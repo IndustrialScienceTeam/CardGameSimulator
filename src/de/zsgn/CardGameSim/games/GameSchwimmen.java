@@ -30,7 +30,7 @@ public class GameSchwimmen extends Game {
                 for (int j = 0; j < getPlayersforSchwimmen().length; j++) {
                     PlayerSchwimmen player = getPlayersforSchwimmen()[j];
                     printDebug("--------------------------");
-                    Thread.sleep(1000);
+                    Thread.sleep(500);
                     printDebug("Current Player: "+player);
                     if(player.equals(playerthatpassed)){
                         printDebug("DONE!");
