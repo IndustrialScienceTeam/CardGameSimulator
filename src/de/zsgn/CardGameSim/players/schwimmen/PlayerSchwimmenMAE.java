@@ -49,27 +49,35 @@ public class PlayerSchwimmenMAE extends PlayerSchwimmen {
 		
 		
 		return action;
-	}	
-	
-	
-	
-	@Override
-	public void OnPlayerGotCard(PlayerSchwimmen player, Card card) {
-		// TODO Auto-generated method stub
-		
 	}
-
 	@Override
-	public void OnPlayerExchangedCards(PlayerSchwimmen player, Card card) {
+	public CardExchange getCardExchange(ArrayList<Card> cardsontable) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
-
 	@Override
-	protected boolean takeThisHand(ArrayList<Card> hand) {
+	protected boolean wanttotakeThisHand(ArrayList<Card> hand) {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	@Override
+	public boolean wantToPass(ArrayList<Card> cardsontable) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public void playerChangedCards(CardExchange cardex, PlayerSchwimmen player) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void playerPassed(PlayerSchwimmen player) {
+		// TODO Auto-generated method stub
+		
+	}	
+	
+	
+
 	
 	
 	
