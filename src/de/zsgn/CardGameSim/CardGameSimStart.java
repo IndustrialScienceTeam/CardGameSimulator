@@ -17,14 +17,14 @@ public final static PlayerSchwimmen[] PLAYERS =new PlayerSchwimmen[]{new PlayerS
     public static void main(String[] args) {
         Hashtable<Player, Integer> wins=new Hashtable<Player, Integer>();
         try {
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 4; i++) {
                 Game schwimmen=new GameSchwimmen(PLAYERS);
                 Player winner=schwimmen.startGame();
                 int oldwins=0;
-                if(wins.get(winner)!=null){
+                if(wins.containsKey(winner)){
                 oldwins=wins.get(winner);
                 }
-                wins.put(winner, oldwins++);
+                wins.put(winner, oldwins+1);
             }
         } catch (Exception e) {
             e.printStackTrace();
