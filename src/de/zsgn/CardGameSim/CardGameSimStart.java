@@ -11,12 +11,14 @@ import de.zsgn.CardGameSim.players.schwimmen.PlayerSchwimmen;
 import de.zsgn.CardGameSim.players.schwimmen.PlayerSchwimmenDebug;
 
 public class CardGameSimStart {
+public final static PlayerSchwimmen[] PLAYERS =new PlayerSchwimmen[]{new PlayerSchwimmenDebug("DICK"),new PlayerSchwimmenDebug("DOOF")};
+
 
     public static void main(String[] args) {
-        Game schwimmen=new GameSchwimmen(new PlayerSchwimmen[]{new PlayerSchwimmenDebug("DICK"),new PlayerSchwimmenDebug("DOOF")});
         Hashtable<Player, Integer> wins=new Hashtable<Player, Integer>();
         try {
             for (int i = 0; i < 3; i++) {
+                Game schwimmen=new GameSchwimmen(PLAYERS);
                 Player winner=schwimmen.startGame();
                 int oldwins=0;
                 if(wins.get(winner)!=null){
