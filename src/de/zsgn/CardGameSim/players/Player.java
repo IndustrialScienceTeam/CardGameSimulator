@@ -9,6 +9,13 @@ public abstract class Player {
         super();
         this.name = name;
     }
+    protected void printDebug(String string) {
+        System.out.println(this+": "+string);
+    }
+    @Override
+    public String toString() {
+        return "Player " + name;
+    }
 
    
     

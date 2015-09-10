@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Random;
 
 import de.zsgn.CardGameSim.cards.Card;
+import de.zsgn.CardGameSim.cards.CardExchange;
 import de.zsgn.CardGameSim.cards.CardFactory;
 import de.zsgn.CardGameSim.players.Player;
 import de.zsgn.CardGameSim.players.schwimmen.PlayerSchwimmen;
@@ -13,24 +14,87 @@ import de.zsgn.CardGameSim.players.schwimmen.PlayerSchwimmen;
 public class GameSchwimmen extends Game {
     public final static int CARDSONHAND=3;
     public final static Random rand=new Random();
-    ArrayList<Card> cardsontable=null;
+    protected ArrayList<Card> cardsontable=null;
+    protected PlayerSchwimmen playerthatpassed=null;
 
     public GameSchwimmen(PlayerSchwimmen[] players) {
         super(players, CardFactory.getSkatSet(), 5);
     }
 
     @Override
-    public Player startGame(int rounds) {
-        for (int i = 0; i < rounds; i++) {
+    public Player startGame(int rounds) throws Exception {
+        for (int round = 0; round < rounds; round++) {
             cardsontable= giveHands(rand.nextInt(players.length));
             printGameInfo();
+            while(true){
+                for (int j = 0; j < getPlayersforSchwimmen().length; j++) {
+                    PlayerSchwimmen player = getPlayersforSchwimmen()[j];
+                    printDebug("Current Player: "+player);
+                    if(player.equals(playerthatpassed))
+                        break;
+                    if(playerthatpassed==null&&player.wantToPass(cardsontable)){
+                        playerthatpassed=player;
+                        playerPassed(playerthatpassed);
+                    }else{
+                        CardExchange cardex=player.getCardExchange(cardsontable);
+                        if(cardex.isCompleteChange()){
+                            printDebug("Player changes all cards!");
+                            ArrayList<Card> oldcardsontable=cardsontable;
+                            cardsontable.clear();
+                            cardsontable.addAll(player.getHand());
+                            player.setHand(oldcardsontable);   
+                        }else {
+                            if(cardsontable.contains(cardex.getTableCard())&&player.getHand().contains(cardex.getHandCard())){
+                                cardsontable.remove(cardex.getTableCard());
+                                cardsontable.add(cardex.getHandCard());
+                                ArrayList<Card> newHand =player.getHand();
+                                newHand.remove(cardex.getHandCard());
+                                newHand.add(cardex.getTableCard());
+                                player.setHand(newHand);
+                            }else{
+                                throw new Exception("WTF, DAS GEHT NICHT! "+cardex);
+                            }
+                        }
+                        playerChangedCards(cardex,player);
+                    }
+                }
+            }
+
         }
-        return null;
+        //No lives at the moment
+        PlayerSchwimmen winningplayer=getPlayersforSchwimmen()[0];
+        for (int i = 1; i < getPlayersforSchwimmen().length; i++) {
+            PlayerSchwimmen player = getPlayersforSchwimmen()[i];
+            if(GameSchwimmenHelper.getHandValue(winningplayer.getHand().toArray(new Card[]{}))<GameSchwimmenHelper.getHandValue(player.getHand().toArray(new Card[]{}))){
+                winningplayer=player;
+            }
+        }
+        return winningplayer;
 
     }
+    protected void playerChangedCards(CardExchange cardex, PlayerSchwimmen player) {
+        printDebug("Player changed Cards:");
+        if(cardex.isCompleteChange()){
+           printDebug("Complete change!");
+        }else{
+            printDebug("Wants "+cardex.getTableCard()+" for "+cardex.getHandCard());
+        }
+        for (PlayerSchwimmen playernotify : getPlayersforSchwimmen()) {
+            playernotify.playerChangedCards(cardex, player);
+        }
+
+    }
+
+    protected void playerPassed(PlayerSchwimmen player) {
+        printDebug("Player passed!");
+        for (PlayerSchwimmen playernotify : getPlayersforSchwimmen()) {
+            playernotify.playerPassed(player);
+        }
+    }
+
     public void printGameInfo() {
         System.out.println("Auf dem Tisch:");
-        
+
         for (Card card : cardsontable) {
             System.out.println(card);
         }
@@ -41,13 +105,14 @@ public class GameSchwimmen extends Game {
             for (Card card : player.getHand()) {
                 System.out.println(card);
             }
-            System.out.println("Value on table: "+ GameSchwimmenHelper.getHandValue(player.getHand().toArray(new Card[]{})));
+            System.out.println("Value in Hand: "+ GameSchwimmenHelper.getHandValue(player.getHand().toArray(new Card[]{})));
             System.out.println();
         }
-        
+
     }
 
     protected ArrayList<Card> giveHands(int playerthatchoses) {
+        printDebug("Giving Cards...");
         //Erstelle Kartenliste zum Mischen
         ArrayList<Card> cardslist=new ArrayList<Card>();
         for (Card card : cardset) {
@@ -76,8 +141,14 @@ public class GameSchwimmen extends Game {
             }
             i++;
         }
+        printDebug("Done Giving Cards");
         return extrahand;
     } 
+
+    protected void printDebug(String string) {
+        System.out.println(string);
+
+    }
 
     protected PlayerSchwimmen[] getPlayersforSchwimmen(){
         if(players instanceof PlayerSchwimmen[]){

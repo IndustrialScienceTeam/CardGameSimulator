@@ -11,7 +11,11 @@ public class CardGameSimStart {
 
     public static void main(String[] args) {
         Game schwimmen=new GameSchwimmen(new PlayerSchwimmen[]{new PlayerSchwimmenDebug("DICK"),new PlayerSchwimmenDebug("DOOF")});
-        schwimmen.startGame(1);
+        try {
+            schwimmen.startGame(1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void testCardFactory() {
