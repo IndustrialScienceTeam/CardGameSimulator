@@ -22,8 +22,7 @@ public class GameSchwimmen extends Game {
     }
 
     @Override
-    public Player startGame(int rounds) throws Exception {
-        for (int round = 0; round < rounds; round++) {
+    public Player startGame() throws Exception {
             cardsontable= giveHands(rand.nextInt(players.length));
             printGameInfo();
             boolean gameruning=true;
@@ -64,8 +63,6 @@ public class GameSchwimmen extends Game {
                     }
                 }
             }
-
-        }
         printGameInfo();
         //No lives at the moment, kein Unentschieden
         PlayerSchwimmen winningplayer=getPlayersforSchwimmen()[0];
