@@ -9,9 +9,10 @@ import de.zsgn.CardGameSim.games.GameSchwimmen;
 import de.zsgn.CardGameSim.players.Player;
 import de.zsgn.CardGameSim.players.schwimmen.PlayerSchwimmen;
 import de.zsgn.CardGameSim.players.schwimmen.PlayerSchwimmenDebug;
+import de.zsgn.CardGameSim.players.schwimmen.PlayerSchwimmenMAE2;
 
 public class CardGameSimStart {
-public final static PlayerSchwimmen[] PLAYERS =new PlayerSchwimmen[]{new PlayerSchwimmenDebug("DICK"),new PlayerSchwimmenDebug("DOOF")};
+public final static PlayerSchwimmen[] PLAYERS =new PlayerSchwimmen[]{new PlayerSchwimmenDebug("DICK"),new PlayerSchwimmenDebug("DOOF"),new PlayerSchwimmenMAE2("MAE")};
 
 
     public static void main(String[] args) {
