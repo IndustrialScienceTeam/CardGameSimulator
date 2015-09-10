@@ -26,22 +26,27 @@ public class GameSchwimmen extends Game {
         for (int round = 0; round < rounds; round++) {
             cardsontable= giveHands(rand.nextInt(players.length));
             printGameInfo();
-            while(true){
+            boolean gameruning=true;
+            while(gameruning){
                 for (int j = 0; j < getPlayersforSchwimmen().length; j++) {
                     PlayerSchwimmen player = getPlayersforSchwimmen()[j];
+                    printDebug("--------------------------");
+                    Thread.sleep(1000);
                     printDebug("Current Player: "+player);
-                    if(player.equals(playerthatpassed))
+                    if(player.equals(playerthatpassed)){
+                        gameruning=false;
                         break;
+                    }
                     if(playerthatpassed==null&&player.wantToPass(cardsontable)){
                         playerthatpassed=player;
                         playerPassed(playerthatpassed);
                     }else{
                         CardExchange cardex=player.getCardExchange(cardsontable);
-                        if(cardex.isCompleteChange()){
-                            printDebug("Player changes all cards!");
+                        if(cardex.isCompleteChange()){ 
                             ArrayList<Card> oldcardsontable=cardsontable;
                             cardsontable.clear();
                             cardsontable.addAll(player.getHand());
+                            System.err.println(oldcardsontable);
                             player.setHand(oldcardsontable);   
                         }else {
                             if(cardsontable.contains(cardex.getTableCard())&&player.getHand().contains(cardex.getHandCard())){
@@ -75,7 +80,7 @@ public class GameSchwimmen extends Game {
     protected void playerChangedCards(CardExchange cardex, PlayerSchwimmen player) {
         printDebug("Player changed Cards:");
         if(cardex.isCompleteChange()){
-           printDebug("Complete change!");
+            printDebug("Complete change!");
         }else{
             printDebug("Wants "+cardex.getTableCard()+" for "+cardex.getHandCard());
         }
