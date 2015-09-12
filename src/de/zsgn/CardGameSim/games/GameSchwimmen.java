@@ -107,13 +107,12 @@ public class GameSchwimmen extends Game {
     }
 
     public void printGameInfo() {
-        printDebug("Auf dem Tisch:",0);
+        printDebug("Auf dem Tisch(" + GameSchwimmenHelper.getHandValue(cardsontable.toArray(new Card[]{})) + ":)",1);
 
         for (Card card : cardsontable) {
-        	printDebug(card.toString(),0);
+        	printDebug(card.toString(),1);
         }
-        printDebug("Value on table: "+ GameSchwimmenHelper.getHandValue(cardsontable.toArray(new Card[]{})),0);
-        printDebug("",0);
+        
         for (PlayerSchwimmen player : getPlayersforSchwimmen()) {
         	printDebug("Player: "+player.name,0);
             for (Card card : player.getHand()) {
