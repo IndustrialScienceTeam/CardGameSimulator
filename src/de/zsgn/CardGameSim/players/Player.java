@@ -3,6 +3,7 @@ package de.zsgn.CardGameSim.players;
 import de.zsgn.CardGameSim.games.Game;
 
 public abstract class Player {
+	public final static  boolean DEBUGMODE = false;
     public final String name;
 
     protected Player(String name) {
@@ -10,7 +11,10 @@ public abstract class Player {
         this.name = name;
     }
     protected void printDebug(String string) {
-        System.out.println(this+": "+string);
+       if(DEBUGMODE) {System.out.println(this+": "+string);}
+       
+    	   
+       
     }
     @Override
     public String toString() {

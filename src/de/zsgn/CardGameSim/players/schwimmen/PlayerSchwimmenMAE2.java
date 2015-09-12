@@ -6,7 +6,7 @@ import de.zsgn.CardGameSim.cards.CardExchange;
 import de.zsgn.CardGameSim.games.GameSchwimmenHelper;
 
 public class PlayerSchwimmenMAE2 extends PlayerSchwimmen {
-
+	
 	public PlayerSchwimmenMAE2(String name) {
 		super(name);
 
@@ -74,7 +74,10 @@ public class PlayerSchwimmenMAE2 extends PlayerSchwimmen {
 	@Override
 	public void playerPassed(PlayerSchwimmen player) {
 		printDebug("MAE doesn´t care either");
+		
 
 	}
+	
+	 
 
 }

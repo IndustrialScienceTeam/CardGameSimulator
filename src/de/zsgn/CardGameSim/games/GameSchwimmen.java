@@ -16,11 +16,13 @@ public class GameSchwimmen extends Game {
     public final static Random rand=new Random();
     protected ArrayList<Card> cardsontable=null;
     protected PlayerSchwimmen playerthatpassed=null;
+    public final static  boolean DEBUGMODE = false;
 
     public GameSchwimmen(PlayerSchwimmen[] players) {
         super(players, CardFactory.getSkatSet(), 5);
     }
 
+    
     @Override
     public Player startGame() throws Exception {
             cardsontable= giveHands(rand.nextInt(players.length));
@@ -29,11 +31,11 @@ public class GameSchwimmen extends Game {
             while(gameruning){
                 for (int j = 0; j < getPlayersforSchwimmen().length; j++) {
                     PlayerSchwimmen player = getPlayersforSchwimmen()[j];
-                    printDebug("--------------------------");
-                    Thread.sleep(500);
-                    printDebug("Current Player: "+player);
+                    printDebug("--------------------------",0);
+                    //Thread.sleep(500);
+                    printDebug("Current Player: "+player ,0);
                     if(player.equals(playerthatpassed)){
-                        printDebug("DONE!");
+                        printDebug("DONE!",0);
                         gameruning=false;
                         break;
                     }
@@ -76,11 +78,11 @@ public class GameSchwimmen extends Game {
 
     }
     protected void playerChangedCards(CardExchange cardex, PlayerSchwimmen player) {
-        printDebug("Player changed Cards:");
+        printDebug("Player changed Cards:",0);
         if(cardex.isCompleteChange()){
-            printDebug("Complete change!");
+            printDebug("Complete change!",0);
         }else{
-            printDebug("Wants "+cardex.getTableCard()+" for "+cardex.getHandCard());
+            printDebug("Wants "+cardex.getTableCard()+" for "+cardex.getHandCard(),0);
         }
         for (PlayerSchwimmen playernotify : getPlayersforSchwimmen()) {
             playernotify.playerChangedCards(cardex, player);
@@ -89,33 +91,33 @@ public class GameSchwimmen extends Game {
     }
 
     protected void playerPassed(PlayerSchwimmen player) {
-        printDebug("Player passed!");
+        printDebug("Player passed!",0);
         for (PlayerSchwimmen playernotify : getPlayersforSchwimmen()) {
             playernotify.playerPassed(player);
         }
     }
 
     public void printGameInfo() {
-        System.out.println("Auf dem Tisch:");
+        printDebug("Auf dem Tisch:",0);
 
         for (Card card : cardsontable) {
-            System.out.println(card);
+        	printDebug(card.toString(),0);
         }
-        System.out.println("Value on table: "+ GameSchwimmenHelper.getHandValue(cardsontable.toArray(new Card[]{})));
-        System.out.println();
+        printDebug("Value on table: "+ GameSchwimmenHelper.getHandValue(cardsontable.toArray(new Card[]{})),0);
+        printDebug("",0);
         for (PlayerSchwimmen player : getPlayersforSchwimmen()) {
-            System.out.println("Player: "+player.name);
+        	printDebug("Player: "+player.name,0);
             for (Card card : player.getHand()) {
-                System.out.println(card);
+            	printDebug(card.toString(),0);
             }
-            System.out.println("Value in Hand: "+ GameSchwimmenHelper.getHandValue(player.getHand().toArray(new Card[]{})));
-            System.out.println();
+            printDebug("Value in Hand: "+ GameSchwimmenHelper.getHandValue(player.getHand().toArray(new Card[]{})),0);
+            printDebug("",0);
         }
 
     }
 
     protected ArrayList<Card> giveHands(int playerthatchoses) {
-        printDebug("Giving Cards...");
+        printDebug("Giving Cards...",0);
         //Erstelle Kartenliste zum Mischen
         ArrayList<Card> cardslist=new ArrayList<Card>();
         for (Card card : cardset) {
@@ -144,12 +146,28 @@ public class GameSchwimmen extends Game {
             }
             i++;
         }
-        printDebug("Done Giving Cards");
+        printDebug("Done Giving Cards", 0);
         return extrahand;
     } 
 
-    protected void printDebug(String string) {
-        System.out.println(string);
+    protected void printDebug(String string,int mode) {
+    	switch (mode) {
+		case 0:  //unnamed mode
+			if(DEBUGMODE){
+			System.out.println(string);
+			}
+			break;
+		case 1:  //game log
+			System.out.println(string);
+			break;
+		case 2: //MAE AI debug prints
+			System.out.println("MAE AI: " +string);
+			break;
+		default:
+			break;
+		}
+    	
+    	
 
     }
 
