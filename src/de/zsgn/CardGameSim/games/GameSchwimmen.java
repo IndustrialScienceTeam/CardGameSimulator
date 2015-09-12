@@ -17,7 +17,14 @@ public class GameSchwimmen extends Game {
     protected ArrayList<Card> cardsontable=null;
     protected PlayerSchwimmen playerthatpassed=null;
     public final static  boolean DEBUGMODE = false;
-
+    
+    public final static int LOGGER_MISCS = 0;
+    public final static boolean LOGGER_MISCS_ENABLED = false;
+    public final static int LOGGER_GAMELOG = 1;
+    public final static boolean LOGGER_GAMELOG_ENABLED = true;
+    public final static int LOGGER_MAEAI = 2;
+    public final static boolean LOGGER_MAEAI_ENABLED = true;
+    
     public GameSchwimmen(PlayerSchwimmen[] players) {
         super(players, CardFactory.getSkatSet(), 5);
     }
@@ -154,16 +161,14 @@ public class GameSchwimmen extends Game {
 
     protected void printDebug(String string,int mode) {
     	switch (mode) {
-		case 0:  //unnamed mode
-			if(DEBUGMODE){
-			System.out.println(string);
-			}
+		case LOGGER_MISCS: 
+			if(LOGGER_MISCS_ENABLED){System.out.println(string);}
 			break;
-		case 1:  //game log
-			System.out.println(string);
+		case LOGGER_GAMELOG:  
+			if(LOGGER_GAMELOG_ENABLED){System.out.println("GAMELOG: "+string);}
 			break;
-		case 2: //MAE AI debug prints
-			System.out.println("MAE AI: " +string);
+		case 2:
+			if(LOGGER_MAEAI_ENABLED){System.out.println("MAE AI: " +string);}
 			break;
 		default:
 			break;

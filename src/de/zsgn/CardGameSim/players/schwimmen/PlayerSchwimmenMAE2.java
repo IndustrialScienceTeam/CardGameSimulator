@@ -16,11 +16,11 @@ public class PlayerSchwimmenMAE2 extends PlayerSchwimmen {
 	@Override
 	public CardExchange getCardExchange(ArrayList<Card> cardsontable) {
 		printDebug("Round: " + GameSchwimmenHelper.getRounds() , 2);
-		printDebug("My Cards:",2);
+		printDebug("My Cards("+ Double.toString(GameSchwimmenHelper.getHandValue(this.getHand().toArray(new Card[]{}))) +"):",2);
 		for(Card c : this.getHand()){
 			printDebug("	" +c.toString(), 2);
 		}
-		printDebug("Table:",2);
+		printDebug("Table(" + Double.toString(GameSchwimmenHelper.getHandValue(cardsontable.toArray(new Card[]{})))+ "):",2);
 		for(Card c : cardsontable){
 			printDebug("	" +c.toString(), 2);
 		}
@@ -28,8 +28,9 @@ public class PlayerSchwimmenMAE2 extends PlayerSchwimmen {
 
 		if(GameSchwimmenHelper.getHandValue(cardsontable.toArray(new Card[]{})) > GameSchwimmenHelper.getHandValue(this.getHand().toArray(new Card[]{}))){
 			highestPossible = GameSchwimmenHelper.getHandValue(cardsontable.toArray(new Card[]{}));
+			printDebug("ACTION: taking ALL"  ,2);
 			return new CardExchange(true, null, null);
-
+			
 		}
 		Card desiredReturnCard = null;
 		Card desiredReceivedCard = null;
@@ -47,7 +48,8 @@ public class PlayerSchwimmenMAE2 extends PlayerSchwimmen {
 				}
 			}
 		}
-
+		printDebug("ACTION: taking:'" + desiredReceivedCard.toString() + "' ||| giving:'"+ desiredReturnCard + "'"  ,2);
+		
 		return new CardExchange(false,desiredReturnCard,desiredReceivedCard);
 
 
