@@ -18,7 +18,8 @@ public final static PlayerSchwimmen[] PLAYERS =new PlayerSchwimmen[]{new PlayerS
     public static void main(String[] args) {
         Hashtable<Player, Integer> wins=new Hashtable<Player, Integer>();
         try {
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 4; i++) {
+            	System.err.println("NEW ROUND");
                 Game schwimmen=new GameSchwimmen(PLAYERS);
                 Player winner=schwimmen.startGame();
                 int oldwins=0;

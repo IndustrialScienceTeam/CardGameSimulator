@@ -28,7 +28,9 @@ public class GameSchwimmen extends Game {
             cardsontable= giveHands(rand.nextInt(players.length));
             printGameInfo();
             boolean gameruning=true;
+            GameSchwimmenHelper.setRounds(0);
             while(gameruning){
+            	GameSchwimmenHelper.setRounds(GameSchwimmenHelper.getRounds() +1 );
                 for (int j = 0; j < getPlayersforSchwimmen().length; j++) {
                     PlayerSchwimmen player = getPlayersforSchwimmen()[j];
                     printDebug("--------------------------",0);

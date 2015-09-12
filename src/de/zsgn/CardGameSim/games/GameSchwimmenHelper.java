@@ -3,6 +3,7 @@ package de.zsgn.CardGameSim.games;
 import de.zsgn.CardGameSim.cards.Card;
 
 public class GameSchwimmenHelper {
+	private static int rounds = 0;
 	public static double getHandValue(Card[] hand)
 	{
 
@@ -65,6 +66,12 @@ public class GameSchwimmenHelper {
 
 		}
 
+	}
+	public static int getRounds() {
+		return rounds;
+	}
+	public static void setRounds(int rounds) {
+		GameSchwimmenHelper.rounds = rounds;
 	}
 
 }

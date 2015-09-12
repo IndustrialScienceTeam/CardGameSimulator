@@ -16,7 +16,7 @@ public abstract class PlayerSchwimmen extends Player {
     public ArrayList<Card> giveHand(ArrayList<Card> hand, ArrayList<Card> extrahand) {
         if(extrahand!=null){
             if(!wanttotakeThisHand(hand)){
-                this.hand=extrahand;
+                this.hand=extrahand;                
               return hand;  
             }
         }

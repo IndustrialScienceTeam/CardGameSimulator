@@ -35,13 +35,13 @@ public class PlayerSchwimmenDebug extends PlayerSchwimmen {
 
     @Override
     public void playerChangedCards(CardExchange cardex, PlayerSchwimmen player) {
-        printDebug("I do not care!!!");
+        printDebug("I do not care!!!",0);
         
     }
 
     @Override
     public void playerPassed(PlayerSchwimmen player) {
-        printDebug("I do not care!!!");
+        printDebug("I do not care!!!",0);
         
     }
 
